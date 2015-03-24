@@ -1,3 +1,4 @@
+#gives the number of leap years between two years inputted by the user and also lists out these leap years
 #get two years from user
 puts "please input a year"
 year1 = gets.chomp
