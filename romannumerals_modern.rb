@@ -6,8 +6,8 @@ def romanNumeral(num=309)
 	#start with an empty array for collecting the various roman numeral strings along the way
 	romanString = []
 
-	if num > 1000
-		#if the inputed number is greater than 1000, begin with the largest roman numeral "M"
+	if num >= 1000
+		#if the inputed number is greater than or equal to 1000, begin with the largest roman numeral "M"
 		mstring = "M" * (num / 1000)
 		#to get the number of "M" characters needed, divide the inputted value by the integer 1000 to get the integer value, giving the number of 
 		#thousands in the original input
@@ -25,43 +25,50 @@ def romanNumeral(num=309)
 		#afterwards, we push the value to our collection array just like before and then further subtract from the num value for continued parsing 
 		romanString.push(endstring)
 		num = num - 900
-	elsif num >= 400
-		endstring = "CD"
-		romanString.push(endstring)
-		num = num - 400
 	end	
 
 	#use the exact same procedure for the individual "D" and "C" characters
-	if num > 500
+	if num >= 500
 		dstring = "D" * (num / 500)
 		romanString.push(dstring)
 		num = num % 500
 	end
 
-	if num > 100
+	#400 is a special case just like 900 but it must be listed after 500 or "D" characters have been added for the proper results
+	if num >= 400
+		endstring = "CD"
+		romanString.push(endstring)
+		num = num - 400
+	end
+
+	if num >= 100
 		cstring = "C" * (num / 100)
 		romanString.push(cstring)
 		num = num % 100
 	end
 
 	#we now highlight the special cases of the 10's place by explicitly defining "XC" and "XL" for 90 and 40 respectively
+	#again, 40 is listed after 50 is already checked. If 40 was listed first, then all inputs ending in 50 would return the forty value before the
+	#correct 50 value of "L"
 	if num >= 90
 		endstring = "XC"
 		romanString.push(endstring)
 		num = num - 90
-	elsif num >= 40
-		endstring = "XL"
-		romanString.push(endstring)
-		num = num - 40
 	end
 
-	if num > 50
+	if num >= 50
 		lstring = "L" * (num / 50)
 		romanString.push(lstring)
 		num = num % 50
 	end	
 
-	if num > 10
+	if num >= 40
+		endstring = "XL"
+		romanString.push(endstring)
+		num = num - 40
+	end
+
+	if num >= 10
 		xstring = "X" * (num / 10)
 		romanString.push(xstring)
 		num = num % 10
@@ -74,16 +81,18 @@ def romanNumeral(num=309)
 		endstring = "IX"
 		romanString.push(endstring)
 		num = 0
-	elsif num == 4
-		endstring = "IV"
-		romanString.push(endstring)
-		num = 0
 	end
 
-	if num > 5
+	if num >= 5
 		vstring = "V" * (num / 5)
 		romanString.push(vstring)
 		num = num % 5
+	end
+
+	if num == 4
+		endstring = "IV"
+		romanString.push(endstring)
+		num = 0
 	end
 
 	istring = "I" * num
@@ -93,23 +102,6 @@ def romanNumeral(num=309)
 	puts romanString.join('')
 end
 
-romanNumeral(922)
+romanNumeral(9999)
 
-
-
-
-
-
-
-
-
-
-
-#start with only numerals I, V, and X for simplicity sake
-#parse the number for tens and fives just like last program
-#if num input is 1 through 3
-#if it is 4
-#if it is 5 through 8
-#if it is 9
-#if it is 10
 
