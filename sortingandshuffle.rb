@@ -12,7 +12,9 @@ def sorting(array)
 		#this ensures that count will never exceed the number of elements in the inputted array
 		while count < array.length
 			#compare using index values of the array elements starting with array[0] and array[1]
-			if array[minIndex] > array[count]
+			#compares words in their lowercase form, otherwise capitalized letters would come before lowercase ones, despite alphabetical order
+			#the downcase method just temporarily changes the value of the element during comparison, then they retain their capitalized form in the output
+			if array[minIndex].downcase > array[count].downcase
 				#if the preceding element of the inputted array is a word that comes after the following element
 				#set minIndex (the smallest index value of the array) equal to the count value
 				minIndex = count
@@ -28,7 +30,7 @@ def sorting(array)
 	puts sorted_array
 end
 
-pokemon = %w(abra kadabra alakazam gengar jynx snorlax ivysaur dodrio)
+pokemon = %w(abra kadabra Alakazam gengar jynx Snorlax ivysaur dodrio)
 sorting(pokemon)
 # => abra alakazam dodrio gengar ivysaur jynx kadabra snorlax
 
@@ -37,7 +39,7 @@ puts pokemon.sort
 
 
 
-
+=begin
 #a shuffle method that returns a new array with the elements of the inputted array in a random order
 def shuffle(array)
 
@@ -59,3 +61,4 @@ end
 
 array = %w(a b c d e f g h i j k l m n)
 shuffle(array)
+=end
