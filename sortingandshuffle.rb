@@ -29,7 +29,7 @@ def sorting(array)
 end
 
 pokemon = %w(abra kadabra alakazam gengar jynx snorlax ivysaur dodrio)
-#sorting(pokemon)
+sorting(pokemon)
 # => abra alakazam dodrio gengar ivysaur jynx kadabra snorlax
 
 puts pokemon.sort
