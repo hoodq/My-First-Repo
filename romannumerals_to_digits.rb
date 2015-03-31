@@ -16,7 +16,7 @@ def romanNumeral_to_num(romanString)
 		input = gets.chomp
 		romanNumeral_to_num(input)	
 	end
-	
+
 #also no IL's, VL's, IC's, VC's, LC's, ID's, VD's, XD's, LD's, IM's, VM's, XM's, LM's, DM's
 	if string.include?("IL") || string.include?("VL") || string.include?("IC") || string.include?("VC") || string.include?("LC") || string.include?("ID") || string.include?("VD") || string.include?("XD") || string.include?("LD") || string.include?("IM") || string.include?("VM") || string.include?("XM") || string.include?("LM") || string.include?("DM")
 		puts "Not a valid roman numeral"
@@ -25,14 +25,70 @@ def romanNumeral_to_num(romanString)
 	end
 
 #----------------if proper roman numeral
-#get a string
 #make a hash that pairs each roman numeral with its numerical value
+	roman_hash = {"I" => 1, "IV" => 4, "V" => 5, "IX" => 9, "X" => 10,
+				  "XL" => 40, "L" => 50, "XC" => 90, "C" => 100, "CD" => 400,
+				  "D" => 500, "CM" => 900, "M" => 1000}
 #make an initial count variable starting at 0
+	count = 0
+#convert string into an array, separating out special cases: IV, IX, XL, XC, CD, and CM
+	string_array = Array.new
+	string.each_char do |c|
+		if string[string.length - 1] == "V"
+
+			if string[string.length - 2] == "I"
+				string_array.insert(0, "IV")
+				string.pop(2)
+			end
+
+		elsif string[string.length - 1] == "X"
+
+			if string[string.length - 2] == "I"
+				string_array.insert(0, "IX")
+				string.pop(2)
+			end
+
+		elsif string[string.length - 1] == "L"
+
+			if string[string.length - 2] == "X"
+				string_array.insert(0, "XL")
+				string.pop(2)
+			end
+
+		elsif string[string.length - 1] == "C"
+
+			if string[string.length - 2] == "X"
+				string_array.insert(0, "XC")
+				string.pop(2)
+			end
+
+		elsif string[string.length - 1] == "D"
+
+			if string[string.length - 2] == "C"
+				string_array.insert(0, "CD")
+				string.pop(2)
+			end
+
+		elsif string[string.length - 1] == "M"
+
+			if string[string.length - 2] == "C"
+				string_array.insert(0, "CM")
+				string.pop(2)
+			end
+		else
+			string_array.insert(0, c)
+			string.pop
+		end
+	end
+
 #go through it character by character
 #at each character, retrieve the apropriate number value from the hash, then add it to the count
+	string.each_char do |c|
+		count += roman_hash[c]
+	end
 #then return the count
-
+	string_array
 end
 
-romanNumeral_to_num("IP")
+puts romanNumeral_to_num("IX")
 
