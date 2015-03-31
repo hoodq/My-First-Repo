@@ -1,84 +1,38 @@
-def romanNumeral(num=309)
+def romanNumeral_to_num(romanString)
 
-	romanString = []
-
-	if num >= 1000
-		mstring = "M" * (num / 1000)
-		romanString.push(mstring)
-		num = num % 1000
+#----------------if not a roman numeral
+#make the input all uppercase
+	string = romanString.upcase
+#if string contains characters that aren't I, V, X, C, L, M, or D then ask for another input or end the method (case is more efficient?)
+	if string.include?("A") || string.include?("B") || string.include?("E") || string.include?("F") || string.include?("G") || string.include?("H") || string.include?("J") || string.include?("K") || string.include?("N") || string.include?("O") || string.include?("P") || string.include?("Q") || string.include?("R") || string.include?("S") || string.include?("T") || string.include?("U") || string.include?("W") || string.include?("Y") || string.include?("Z")
+		puts "Not a valid roman numeral"
+		input = gets.chomp
+		romanNumeral_to_num(input)	
 	end
 
-	if num >= 900
-		endstring = "CM" 
-		romanString.push(endstring)
-		num = num - 900
-	end	
-
-	if num >= 500
-		dstring = "D" * (num / 500)
-		romanString.push(dstring)
-		num = num % 500
+#or if there are 4 or more I's in a row, or 2 V's, or 4 X's, or 2 L's, or 4 C's, or 2 D's in a row
+	if string.include?("IIII") || string.include?("VV") || string.include?("XXXX") || string.include?("LL") || string.include?("CCCC") || string.include?("DD")
+		puts "Not a valid roman numeral"
+		input = gets.chomp
+		romanNumeral_to_num(input)	
+	end
+	
+#also no IL's, VL's, IC's, VC's, LC's, ID's, VD's, XD's, LD's, IM's, VM's, XM's, LM's, DM's
+	if string.include?("IL") || string.include?("VL") || string.include?("IC") || string.include?("VC") || string.include?("LC") || string.include?("ID") || string.include?("VD") || string.include?("XD") || string.include?("LD") || string.include?("IM") || string.include?("VM") || string.include?("XM") || string.include?("LM") || string.include?("DM")
+		puts "Not a valid roman numeral"
+		input = gets.chomp
+		romanNumeral_to_num(input)	
 	end
 
-	if num >= 400
-		endstring = "CD"
-		romanString.push(endstring)
-		num = num - 400
-	end
+#----------------if proper roman numeral
+#get a string
+#make a hash that pairs each roman numeral with its numerical value
+#make an initial count variable starting at 0
+#go through it character by character
+#at each character, retrieve the apropriate number value from the hash, then add it to the count
+#then return the count
 
-	if num >= 100
-		cstring = "C" * (num / 100)
-		romanString.push(cstring)
-		num = num % 100
-	end
-
-	if num >= 90
-		endstring = "XC"
-		romanString.push(endstring)
-		num = num - 90
-	end
-
-	if num >= 50
-		lstring = "L" * (num / 50)
-		romanString.push(lstring)
-		num = num % 50
-	end	
-
-	if num >= 40
-		endstring = "XL"
-		romanString.push(endstring)
-		num = num - 40
-	end
-
-	if num >= 10
-		xstring = "X" * (num / 10)
-		romanString.push(xstring)
-		num = num % 10
-	end
-
-	if num == 9
-		endstring = "IX"
-		romanString.push(endstring)
-		num = 0
-	end
-
-	if num >= 5
-		vstring = "V" * (num / 5)
-		romanString.push(vstring)
-		num = num % 5
-	end
-
-	if num == 4
-		endstring = "IV"
-		romanString.push(endstring)
-		num = 0
-	end
-
-	istring = "I" * num
-	romanString.push(istring)
-	puts romanString.join('')
 end
 
-romanNumeral(9999)
-
+romanNumeral_to_num("IP")
 
