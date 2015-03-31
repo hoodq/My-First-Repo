@@ -16,11 +16,11 @@ describe ScrabbleWord do
 		@turn1.score.should == 14
 	end
 
-	it "has a string representation"
-
-	it "has point denominations" do
-		@turn1.point_denominations.should == {'p'=>3, 't'=>1, 'a'=>2, 'r'=>1, 'm'=>3, 'i'=>1, 'g'=>2, 'n'=>1}
+	it "has a string representation" do
+		@turn1.to_s.should == "ptarmagin has a score of 14"
 	end
 
-	it "has a greater score"
+	it "has a greater score" do
+		@turn1.score < @turn1.score
+	end
 end
