@@ -33,62 +33,69 @@ def romanNumeral_to_num(romanString)
 	count = 0
 #convert string into an array, separating out special cases: IV, IX, XL, XC, CD, and CM
 	string_array = Array.new
-	string.each_char do |c|
+	
+	while string.length > 0
 		if string[string.length - 1] == "V"
 
 			if string[string.length - 2] == "I"
-				string_array.insert(0, "IV")
-				string.pop(2)
+				string_array.unshift("IV")
+				string = string[0..-3]
+				return
 			end
 
 		elsif string[string.length - 1] == "X"
 
 			if string[string.length - 2] == "I"
-				string_array.insert(0, "IX")
-				string.pop(2)
+				string_array.unshift("IX")
+				string = string[0..-3]
+				return
 			end
 
 		elsif string[string.length - 1] == "L"
 
 			if string[string.length - 2] == "X"
-				string_array.insert(0, "XL")
-				string.pop(2)
+				string_array.unshift("XL")
+				string = string[0..-3]
+				return
 			end
 
 		elsif string[string.length - 1] == "C"
 
 			if string[string.length - 2] == "X"
-				string_array.insert(0, "XC")
-				string.pop(2)
+				string_array.unshift("XC")
+				string = string[0..-3]
+				return
 			end
 
 		elsif string[string.length - 1] == "D"
 
 			if string[string.length - 2] == "C"
-				string_array.insert(0, "CD")
-				string.pop(2)
+				string_array.unshift("CD")
+				string = string[0..-3]
+				return
 			end
 
 		elsif string[string.length - 1] == "M"
 
 			if string[string.length - 2] == "C"
-				string_array.insert(0, "CM")
-				string.pop(2)
+				string_array.unshift("CM")
+				string = string[0..-3]
+				return
 			end
+
 		else
-			string_array.insert(0, c)
-			string.pop
+			string_array.unshift(string[string.length - 1])
+			string = string[0..-2]
 		end
 	end
 
-#go through it character by character
-#at each character, retrieve the apropriate number value from the hash, then add it to the count
-	string.each_char do |c|
-		count += roman_hash[c]
-	end
+#now that the string is converted to an array with special roman numeral subtraction cases paired up as elements,
+#go through element by element and sum the associated roman_hash point values stored in the count variable defined earlier
+	
+
 #then return the count
 	string_array
 end
 
-puts romanNumeral_to_num("IX")
+puts romanNumeral_to_num("XIX")
 
