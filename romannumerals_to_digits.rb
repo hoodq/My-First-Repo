@@ -25,63 +25,35 @@ def romanNumeral_to_num(romanString)
 	end
 
 #----------------if proper roman numeral
-#make a hash that pairs each roman numeral with its numerical value
-	roman_hash = {"I" => 1, "IV" => 4, "V" => 5, "IX" => 9, "X" => 10,
-				  "XL" => 40, "L" => 50, "XC" => 90, "C" => 100, "CD" => 400,
-				  "D" => 500, "CM" => 900, "M" => 1000}
-#make an initial count variable starting at 0
-	count = 0
+
 #convert string into an array, separating out special cases: IV, IX, XL, XC, CD, and CM
-	string_array = Array.new
+	string_array = []
 	
 	while string.length > 0
-		if string[string.length - 1] == "V"
 
-			if string[string.length - 2] == "I"
+		if string[string.length - 1] == "V" && string[string.length - 2] == "I"
 				string_array.unshift("IV")
 				string = string[0..-3]
-				return
-			end
 
-		elsif string[string.length - 1] == "X"
-
-			if string[string.length - 2] == "I"
+		elsif string[string.length - 1] == "X" && string[string.length - 2] == "I"
 				string_array.unshift("IX")
 				string = string[0..-3]
-				return
-			end
 
-		elsif string[string.length - 1] == "L"
-
-			if string[string.length - 2] == "X"
+		elsif string[string.length - 1] == "L" && string[string.length - 2] == "X"
 				string_array.unshift("XL")
 				string = string[0..-3]
-				return
-			end
 
-		elsif string[string.length - 1] == "C"
-
-			if string[string.length - 2] == "X"
+		elsif string[string.length - 1] == "C" && string[string.length - 2] == "X"
 				string_array.unshift("XC")
 				string = string[0..-3]
-				return
-			end
 
-		elsif string[string.length - 1] == "D"
-
-			if string[string.length - 2] == "C"
+		elsif string[string.length - 1] == "D" && string[string.length - 2] == "C"
 				string_array.unshift("CD")
 				string = string[0..-3]
-				return
-			end
 
-		elsif string[string.length - 1] == "M"
-
-			if string[string.length - 2] == "C"
+		elsif string[string.length - 1] == "M" && string[string.length - 2] == "C"
 				string_array.unshift("CM")
 				string = string[0..-3]
-				return
-			end
 
 		else
 			string_array.unshift(string[string.length - 1])
@@ -89,13 +61,24 @@ def romanNumeral_to_num(romanString)
 		end
 	end
 
+#make a hash that pairs each roman numeral with its numerical value
+	roman_hash = {"I" => 1, "IV" => 4, "V" => 5, "IX" => 9, "X" => 10,
+				  "XL" => 40, "L" => 50, "XC" => 90, "C" => 100, "CD" => 400,
+				  "D" => 500, "CM" => 900, "M" => 1000}
+#make an initial count variable starting at 0
+	count = 0
+
 #now that the string is converted to an array with special roman numeral subtraction cases paired up as elements,
 #go through element by element and sum the associated roman_hash point values stored in the count variable defined earlier
-	
+	string_array.each do |c|
+		count += roman_hash[c]
+	end
 
 #then return the count
-	string_array
+	puts string_array
+	puts string
+	puts count
 end
 
-puts romanNumeral_to_num("XIX")
+romanNumeral_to_num("MMMMMMMMMCMXCIV")
 
