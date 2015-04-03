@@ -10,6 +10,15 @@ class ScrabbleWord
 				 'm' => 3, 'n' => 1, 'o' => 1, 'p' => 3, 'q' => 10, 'r' => 1,
 				 's' => 1, 't' => 1, 'u' => 1, 'v' => 4, 'w' => 4, 'x' => 8,
 				 'y' => 4, 'z' => 10}
+		@letter_points_deviation = Hash.new
+	end
+
+
+	def point_deviations
+		@word.each_char do |letter|
+			@letter_points_deviation[letter] = @letter_points[letter]
+			yield
+		end
 	end
 
 	def score
@@ -27,4 +36,7 @@ class ScrabbleWord
 end
 
 turn1 = ScrabbleWord.new("ptarmigan")
+
 puts turn1
+
+turn1.point_deviations { puts "#{@letter_points_deviation.keys[0]} with value #{@letter_points_deviation.values[0]}" }
