@@ -4,39 +4,51 @@
 #Harry, Ron, Hermione
 
 #-------------------------------------------------------------------------------------------------------
-harry_points = 0
-hermione_points = 0
-ron_points = 0
+harry = 0
+hermione = 0
+ron = 0
 
+puts "Please answer questions in a 'yes' or 'no' format"
+puts ''
+#as it stands, if the user types in anything other than 'yes', program interprets it as a 'no'
 puts "Do people describe you as intelligent?"
 answer = gets.chomp.downcase
 if answer == 'yes'
-	hermione_points += 1
+	hermione += 1
 else
-	ron_points += 1
+	ron += 1
 end
 
 puts "Would you rather fight a dragon than learn more about Gilly Weed?"
 answer = gets.chomp.downcase
 if answer == 'yes'
-	harry_points += 1
+	harry += 1
 else
-	hermione_points += 1
+	hermione += 1
 end
 
 puts "Are spiders scarier than demeantors?"
 answer = gets.chomp.downcase
 if answer == 'yes'
-	ron_points += 1
+	ron += 1
 else
-	harry_points += 1
+	harry += 1
 end
 
-if harry_points > (ron_points && hermione_points)
+puts "Would you want a stag as an animagious over a cat?"
+answer = gets.chomp.downcase
+if answer == 'yes'
+	harry += 1
+else
+	hermione += 1
+end
+
+#fixed the if logic structure to display the proper results
+if (harry > ron) && (harry > hermione)
 	puts "You're Harry!"
-elsif hermione_points > (ron_points && harry_points)
+elsif (hermione > ron) && (hermione > harry)
 	puts "You're Hermione!"
-elsif ron_points > (harry_points && hermione_points)
+elsif (ron > harry) && (ron > hermione)
 	puts "You're Ron!"
 else
 	puts "You didn't match with Harry, Ron, or Hermione"
