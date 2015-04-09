@@ -14,7 +14,7 @@ def word_count_tracker
   puts "please enter the desired word"
   word = gets.chomp
   puts "#{word} appears #{words[word]} time(s)"
-end
+end        
 
 def line_to_array line
   line.split(/[^\w+$]/)
