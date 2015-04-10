@@ -17,7 +17,7 @@ def word_count_tracker
 end        
 
 def line_to_array line
-  line.split(/[^\w+$]/)
+  line.scan(/\w+/)
 end
 
 
